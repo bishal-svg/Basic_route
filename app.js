@@ -1,26 +1,12 @@
 const express=require("express")
 const path =require("path")
 const app=express()
+const Users=require("./route/user.route.js")
 
 
-
-let product={
-  cycle:{
-    category:"vechicle",
-    prize:"999"
-  },
-  watch:{
-      category:"electronics",
-      prize:"444"
-  }
-}
-
-app.get("/",(req,res)=>{
-  res.json(product)
-})
-
-
-
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
+app.use("/api",Users)
 
 
 app.listen(3000,()=>{
