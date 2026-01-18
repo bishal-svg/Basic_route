@@ -5,17 +5,18 @@ exports.getUsers = (req, res) => {
   });
 
 };
+const User=require("../models/user.model.js")
 
-exports.createUser=(req,res)=>{
-    const{name,email}=req.body
-    
+exports.createUser=async(req,res)=>{
+    const{name,email,password}=req.body
+    const user=await User.create({
+      name,
+      email,
+      password
+    })
     res.status(201).json({
-        success:true,
-        msg:"user created!!",
-        data:{
-              name,
-              email
-        }
+        
+        user
 
     })
 

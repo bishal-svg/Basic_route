@@ -1,14 +1,23 @@
+
 const express=require("express")
 const path =require("path")
-const app=express()
+const connectDB=require("./DB/index.js")
+
 const Users=require("./route/user.route.js")
+
+const dotenv=require("dotenv")
+dotenv.config();
+
+const app=express()
+
+connectDB()
 
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
-app.use("/api",Users)
+app.use(express.urlencoded({extended:true}));
+app.use("/api",Users);
 
 
-app.listen(3000,()=>{
-    console.log("server is running on port 3000")
+app.listen(process.env.PORT||3000,()=>{
+    console.log(`server is running on port ${process.env.PORT}`)
 })
